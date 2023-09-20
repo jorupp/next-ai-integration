@@ -2,6 +2,9 @@ import Image from 'next/image'
 import styles from './page.module.css'
 
 export default function Home() {
+  (global as any).__MAGIC_VALUE_PAGE = 'page';
+  console.log(`page() - process.title: ${process.title}.`);
+  console.log(`  global names: ${Object.entries(global).map(([k]) => k).sort()}.`);
   return (
     <main className={styles.main}>
       <div className={styles.description}>
