@@ -1,7 +1,7 @@
 // heavily based on https://nextjs.org/docs/pages/building-your-application/configuring/custom-server
 
 global.__MAGIC_VALUE = 'custom-server';
-console.log(`initial startup - process.title: ${process.title}.`);
+console.log(`initial startup - ${process.pid} - ${process.title} - ${process.env.NEXT_RUNTIME}`);
 console.log(`  global names: ${Object.entries(global).map(([k]) => k).sort()}.`);
 
 const { createServer } = require('http')
@@ -16,12 +16,12 @@ const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
  
 global.__MAGIC_VALUE_2 = 'custom-server-before-prepare';
-console.log(`end of startup - process.title: ${process.title}.`);
+console.log(`end of startup - ${process.pid} - ${process.title} - ${process.env.NEXT_RUNTIME}`);
 console.log(`  global names: ${Object.entries(global).map(([k]) => k).sort()}.`);
 
 app.prepare().then(() => {
     global.__MAGIC_VALUE_3 = 'custom-server-after-prepare';
-    console.log(`after prepare - process.title: ${process.title}.`);
+    console.log(`after prepare - ${process.pid} - ${process.title} - ${process.env.NEXT_RUNTIME}`);
     console.log(`  global names: ${Object.entries(global).map(([k]) => k).sort()}.`);
     
     createServer(async (req, res) => {

@@ -3,7 +3,7 @@ import styles from './page.module.css'
 
 export default function Home() {
   (global as any).__MAGIC_VALUE_PAGE = 'page';
-  console.log(`page() - process.title: ${process.title}.`);
+  console.log(`page() - ${process.pid} - ${process.title} - ${process.env.NEXT_RUNTIME}`);
   console.log(`  global names: ${Object.entries(global).map(([k]) => k).sort()}.`);
   return (
     <main className={styles.main}>
